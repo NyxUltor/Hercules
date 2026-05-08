@@ -1,1 +1,16 @@
-
+PyQt6
+SQLAlchemy
+pydantic
+pydantic-settings
+alembic
+matplotlib
+pandas
+numpy
+fastapi
+uvicorn[standard]
+pytest
+pytest-cov
+ruff
+black
+mypy
+pre-commit
