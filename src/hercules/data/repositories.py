@@ -5,8 +5,9 @@ Abstracts database operations behind a clean interface.
 
 from abc import ABC, abstractmethod
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, date
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from hercules.data.models import WorkoutSession, Exercise, SetLog, WorkoutStatus
 from hercules.data.schemas import (
@@ -137,7 +138,7 @@ class SQLAlchemyWorkoutSessionRepository(WorkoutSessionRepository):
 
     def get_by_date(self, date: datetime) -> Optional[WorkoutSessionSchema]:
         model = self.db.query(WorkoutSession).filter(
-            WorkoutSession.date.cast(datetime).date() == date.date()
+            func.date(WorkoutSession.date) == date.date()
         ).first()
         return WorkoutSessionSchema.from_orm(model) if model else None
 
